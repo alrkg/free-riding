@@ -53,11 +53,11 @@ int main(int argc, char* argv[])
         }
 
         if (header->len > sizeof(EthIpTcpHdr)) {
-            EthIpTcpHdr* ethIpTcpHdr =  (EthIpTcpHdr*)(packet);
+            EthIpTcpHdr* ethIpTcpHdr = (EthIpTcpHdr*)(packet);
             if (!(ntohs(ethIpTcpHdr->eth.ethType) == 0x0800)) continue;
             if (!(ethIpTcpHdr->ipv4.proto == 0x06)) continue;
 
-            if (htons(ethIpTcpHdr->tcp.dstPort) == 8888) {
+            if (htons(ethIpTcpHdr->tcp.dstPort) == 0x000) {
                 char buffer[BUFSIZ];
                 memcpy(buffer, packet, ETH_HDR_LEN);
                 memcpy(buffer + ETH_HDR_LEN, packet + sizeof(EthIpTcpHdr), header->len - sizeof(EthIpTcpHdr));

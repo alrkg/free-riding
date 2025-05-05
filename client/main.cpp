@@ -95,13 +95,12 @@ int main(int argc, char* argv[])
     fd = nfq_fd(h);
     while(1) {
         if ((rv = recv(fd, buf, sizeof(buf), 0)) >= 0) {
-            printf("pkt received\n");
             nfq_handle_packet(h, buf, rv);
             continue;
         }
 
         if (rv < 0 && errno == ENOBUFS) {
-            printf("losing packets!\n");
+            fprintf(stderr, "losing packets!\n");
             continue;
         }
         perror("recv failed");

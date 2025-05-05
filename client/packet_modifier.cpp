@@ -17,7 +17,7 @@ uint16_t PacketModifier::calcChecksum(uint16_t* data, int length) {
     return (uint16_t)(~sum);
 }
 
-// Receives a proxy IP, Port sorted in network byte order as a parameter
+// Receives a proxy IP sorted in network byte order as a parameter
 int PacketModifier::setFakeHeader(unsigned char* packet, int origLen, unsigned char* fakePacket, uint32_t proxyIp) {
     if (!packet) {
         fprintf(stderr, "[setFakeHeader] Null pointer passed for packet data.\n");
